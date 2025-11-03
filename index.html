@@ -15,26 +15,85 @@
         body {
             font-family: 'Inter', 'Noto Sans TC', sans-serif;
         }
+        
+        /* * 新增的 Wiggle 搖擺動畫 
+         */
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+        .animate-wiggle {
+            animation: wiggle 2s ease-in-out infinite;
+        }
     </style>
+    <!-- 
+      Tailwind JIT 設定 (為了讓動畫生效)
+      我們需要告訴 Tailwind 我們要使用這個 'wiggle' 動畫
+    -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        wiggle: 'wiggle 2s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-3deg)' },
+                            '50%': { transform: 'rotate(3deg)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-blue-50 min-h-screen flex items-center justify-center p-4 sm:p-8">
+<!-- 
+  [變更] 
+  使用 'bg-gradient-to-br' 製作可愛的漸層背景 
+  (from-pink-100 via-white to-blue-100)
+-->
+<body class="bg-gradient-to-br from-pink-100 via-white to-blue-100 min-h-screen flex items-center justify-center p-4 sm:p-8">
 
     <!-- 主內容卡片 -->
     <div class="bg-white w-full max-w-4xl rounded-2xl shadow-lg overflow-hidden my-8">
         
-        <!-- 標頭與插圖 -->
-        <div class="bg-blue-500 p-8 md:p-12 text-white relative overflow-hidden">
-            <!-- 裝飾用 SVG - 氣球 -->
-            <svg class="absolute -top-4 -right-4 w-32 h-32 text-blue-400 opacity-60 transform rotate-12" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm0 2a10 10 0 100-20 10 10 0 000 20z" clip-rule="evenodd"></path><path d="M10 5.5a.5.5 0 01.5.5v2.5a.5.5 0 01-1 0V6a.5.5 0 01.5-.5z"></path><path d="M10 10.5a.5.5 0 01.5.5v2.5a.5.5 0 01-1 0V11a.5.5 0 01.5-.5z"></path><path d="M7.5 10a.5.5 0 000 1h5a.5.5 0 000-1h-5z"></path></svg>
+        <!-- 
+          [變更] 
+          標頭改為 'bg-pink-500' 粉色系
+        -->
+        <div class="bg-pink-500 p-8 md:p-12 text-white relative overflow-hidden">
             
-            <!-- 裝飾用 SVG - 派對拉炮 -->
-            <svg class="absolute -bottom-6 -left-2 w-28 h-28 text-yellow-300 opacity-70 transform -rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <!-- 
+              [新增] 
+              左上角的小禮物圖示
+            -->
+            <svg class="absolute -top-5 -left-5 w-32 h-32 text-pink-400 opacity-60 transform -rotate-12 animate-wiggle" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 5a3 3 0 013-3h4a3 3 0 013 3v2.586a1 1 0 01-.293.707l-4 4a1 1 0 01-1.414 0l-4-4A1 1 0 015 7.586V5zm4 7a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path><path d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"></path></svg>
+
+            <!-- 
+              [變更] 
+              裝飾用 SVG - 氣球
+              - 顏色改為 'text-pink-400'
+              - 加上 'animate-wiggle' 動畫
+            -->
+            <svg class="absolute -top-4 -right-4 w-32 h-32 text-pink-400 opacity-60 transform rotate-12 animate-wiggle" style="animation-delay: -1s;" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm0 2a10 10 0 100-20 10 10 0 000 20z" clip-rule="evenodd"></path><path d="M10 5.5a.5.5 0 01.5.5v2.5a.5.5 0 01-1 0V6a.5.5 0 01.5-.5z"></path><path d="M10 10.5a.5.5 0 01.5.5v2.5a.5.5 0 01-1 0V11a.5.5 0 01.5-.5z"></path><path d="M7.5 10a.5.5 0 000 1h5a.5.5 0 000-1h-5z"></path></svg>
+            
+            <!-- 
+              [變更] 
+              裝飾用 SVG - 派對拉炮
+              - 加上 'animate-wiggle' 動畫
+            -->
+            <svg class="absolute -bottom-6 -left-2 w-28 h-28 text-yellow-300 opacity-70 transform -rotate-12 animate-wiggle" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
 
             <div class="relative z-10">
                 <h1 class="text-3xl sm:text-4xl font-bold mb-2">
                     誠摯邀請您！
                 </h1>
-                <p class="text-lg sm:text-xl font-medium text-blue-100">
+                <!-- 
+                  [變更] 
+                  文字顏色改為 'text-pink-100'
+                -->
+                <p class="text-lg sm:text-xl font-medium text-pink-100">
                     70週年香中校慶暨園遊會 貴賓回函
                 </p>
             </div>
@@ -42,11 +101,16 @@
 
         <!-- 活動資訊 -->
         <div class="p-6 sm:p-10">
-            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-5 rounded-lg mb-8">
-                <h2 class="text-xl font-bold text-yellow-800 mb-2">
+            <!-- 
+              [變更] 
+              資訊欄改為粉色系
+              (bg-pink-50, border-pink-400, text-pink-800, text-pink-700)
+            -->
+            <div class="bg-pink-50 border-l-4 border-pink-400 p-5 rounded-lg mb-8">
+                <h2 class="text-xl font-bold text-pink-800 mb-2">
                     活動主題：EMPOWER引爆香中，贏向未來
                 </h2>
-                <ul class="text-yellow-700 space-y-1">
+                <ul class="text-pink-700 space-y-1">
                     <li><strong>日期：</strong>114年11月15日 (星期六)</li>
                     <li><strong>時間：</strong>上午8時30分</li>
                     <li><strong>地點：</strong>新竹市立香山高級中學</li>
@@ -78,3 +142,4 @@
 
 </body>
 </html>
+
